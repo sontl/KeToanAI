@@ -21,6 +21,11 @@ class ChatProvider with ChangeNotifier {
         message: msg,
         modelId: chosenModelId,
       ));
+    } else if (chosenModelId.toLowerCase().startsWith("claude-3")) {
+      chatList.addAll(await ApiService.sendMessageClaude(
+        message: msg,
+        modelId: chosenModelId,
+      ));
     } else {
       chatList.addAll(await ApiService.sendMessage(
         message: msg,

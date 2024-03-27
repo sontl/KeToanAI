@@ -86,7 +86,8 @@ class ApiService {
 
   // Send Message Claude 3
   static Future<List<ChatModel>> sendMessageClaude(
-      {required String message, required String modelId}) async {
+      {required List<Map<String, dynamic>> message,
+      required String modelId}) async {
     try {
       log("modelId $modelId");
       var response = await http.post(
@@ -102,9 +103,7 @@ class ApiService {
             "max_tokens": 1024,
             "system":
                 "You are an expert accountant in Vietnam who specializes in tax and international tax law. You should provide answers related to tax and accountancy in Vietnam, response in Vietnamese regardless of the user question language. Your name is Nguyễn Kế Toán.",
-            "messages": [
-              {"role": "user", "content": message}
-            ],
+            "messages": message,
           },
         ),
       );
